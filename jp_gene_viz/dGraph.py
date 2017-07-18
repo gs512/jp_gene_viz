@@ -289,12 +289,13 @@ class WGraph(JsonMixin):
             w = ew[e]
             a = ea[e]
             other_atts = {}
-            if a:
-                for att in svg_canvas.STROKE_ATTRIBUTES:
-                    if att in a:
-                        value = a[att]
-                        if value and value.upper() != "NONE":
-                            other_atts[att] = a[att]
+            if a:               
+                if hasattr(svg_canvas, 'STROKE_ATTRIBUTES'):
+                    for att in svg_canvas.STROKE_ATTRIBUTES:
+                        if att in a:
+                            value = a[att]
+                            if value and value.upper() != "NONE":
+                                other_atts[att] = a[att]
             (f, t) = e
             outdegree[f] = outdegree.get(f, 0) + 1
             fp = positions[f]
